@@ -1,4 +1,4 @@
-/*!
+/*
  * jQuery JavaScript Library v3.6.1
  * https://jquery.com/
  *
@@ -10,7 +10,7 @@
  * https://jquery.org/license
  *
  * Date: 2022-08-26T17:52Z
- */
+*/
 ( function( global, factory ) {
 
 	"use strict";
@@ -521,7 +521,7 @@ function isArrayLike( obj ) {
 		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
 }
 var Sizzle =
-/*!
+/*
  * Sizzle CSS Selector Engine v2.3.6
  * https://sizzlejs.com/
  *
@@ -530,7 +530,7 @@ var Sizzle =
  * https://js.foundation/
  *
  * Date: 2021-02-16
- */
+*/
 ( function( window ) {
 var i,
 	support,
