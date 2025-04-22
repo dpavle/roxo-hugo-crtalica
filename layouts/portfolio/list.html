@@ -1,6 +1,45 @@
 {{ define "main" }}
 
-{{ $dataJ := getJSON .Site.Params.behold_url }}
+<script>
+  document.addEventListener("DOMContentLoaded", async function () {
+    const beholdUrl = "{{ .Site.Params.behold_url }}";
+    const projectContainer = document.getElementById("project-container");
+
+    try {
+      const response = await fetch(beholdUrl);
+      const data = await response.json();
+
+      const projects = data.slice(0, 6);
+
+      projects.forEach(item => {
+        const mediaType = item.mediaType.toLowerCase();
+        const mediaUrl = item.mediaUrl;
+        const permalink = item.permalink;
+        const caption = item.caption || "";
+
+        const projectHTML = `
+          <div class="col-lg-6 col-md-10 mx-auto">
+            <div class="site-project-item">
+              <a href="${permalink}" target="_blank" rel="noopener noreferrer">
+                <div class="site-project-item-thumb">
+                  <img class="${mediaType}" src="${mediaUrl}" alt="${caption}">
+                </div>
+                <div class="site-project-item-content">
+                  <h4>${caption}</h4>
+                </div>
+              </a>
+            </div>
+          </div>
+        `;
+
+        projectContainer.innerHTML += projectHTML;
+      });
+    } catch (error) {
+      console.error("Error fetching project data:", error);
+      projectContainer.innerHTML = `<p>Greška pri dobavljanju postova.</p>`;
+    }
+  });
+</script>
 
 <section class="site-project-header">
   <div class="container">
@@ -23,28 +62,8 @@
 
 <section class="site-project" id="project">
   <div class="container">
-    <div class="row">
-      {{ range first 20 $dataJ }}
-        {{ $media_type := .mediaType | lower }}
-        {{ $media_url := .mediaUrl }}
-        {{ $permalink := .permalink }}
-        {{ $caption := .caption }}
-      <div class="col-lg-6 col-md-10 mx-auto">
-        <div class="site-project-item">
-          <a href="{{ $permalink }}" target="_blank" rel="noopener noreferrer">
-          <div class="site-project-item-thumb">
-            <img class="{{ $media_type }}" src="{{ $media_url }}" {{ with $caption }}alt="{{ . }}"{{ else }}alt=""{{ end }}>
-          </div>
-          <div class="site-project-item-content">
-           <h4>{{ $caption }}</h4>
-          </div>
-        </a>
-        </div>
-      </div>
-      {{ end }}
-        </div>
-      </div>
-    </div>
+    <!-- placeholder for JS rendered content -->
+    <div id="project-container" class="row"></div>
   </div>
 </section>
 
