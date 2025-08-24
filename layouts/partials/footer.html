@@ -56,7 +56,7 @@
         <a href="#top" class="site-footer-widget-top">
           <img src="{{ "images/to-top.svg" | absURL }}" alt="back-to-top">
           <p>
-            Povratak 
+            Povratak
             <br>
             gore
           </p>
@@ -66,8 +66,9 @@
     </div>
   </div>
 </footer>
-
 {{ $vendor := resources.Get "js/vendor.js" | minify }}
 <script defer src="{{ $vendor.Permalink }}"></script>
 {{ $script := resources.Get "js/script.js" | minify }}
 <script defer src="{{ $script.Permalink }}"></script>
+{{ $bootstrap := resources.Get "js/bootstrap.js" | minify }}
+<script defer src="{{ $bootstrap.Permalink }}"></script>
